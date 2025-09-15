@@ -434,6 +434,8 @@ JOYFUL_RESPONSES = [
     "🌈 Brilliant! 🌈"
 ]
 
+COLORS = ['#00FF41', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8']
+
 
 class TypingGame:
     """Main typing game class."""
@@ -441,6 +443,7 @@ class TypingGame:
     def __init__(self):
         """Initialize the typing game."""
         self.score = 0
+        self.color_index = 0
         self.target_letter = None
         self.root = tk.Tk()
         self.root.title("Tip-Tap Typing Game")
@@ -478,7 +481,12 @@ class TypingGame:
         ascii_art = '\n'.join(ASCII_LETTERS[self.target_letter])
         # Replace letters with block characters for prettier display
         pretty_art = ascii_art.replace(self.target_letter, '█')
-        self.letter_label.config(text=pretty_art)
+
+        # Cycle through colors
+        current_color = COLORS[self.color_index]
+        self.color_index = (self.color_index + 1) % len(COLORS)
+
+        self.letter_label.config(text=pretty_art, fg=current_color)
         self.prompt_label.config(text=f"Press the '{self.target_letter}' key!")
         self.response_label.config(text="")
 
