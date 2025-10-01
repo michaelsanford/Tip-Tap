@@ -31,6 +31,7 @@ class TypingGame:
         self.root.geometry("800x600")
         self.root.configure(bg='#1a1a2e')
         self.root.bind('<KeyPress>', self.on_key_press)
+        self.root.bind('<Configure>', self.on_resize)
         self.root.focus_set()
 
         # Create main frame that centers content
@@ -89,6 +90,14 @@ class TypingGame:
         self.root.configure(bg='#1a1a2e')
         self.main_frame.configure(bg='#1a1a2e')
 
+    def on_resize(self, event):
+        """Scale letter font based on window size."""
+        if event.widget == self.root:
+            font_size = min(self.root.winfo_width(), self.root.winfo_height()) // 4
+            font_size = max(50, min(font_size, 300))  # Keep between 50-300
+            self.letter_label.config(font=('Arial', font_size, 'bold'))
+            self.shadow_label.config(font=('Arial', font_size, 'bold'))
+
     def on_key_press(self, event):
         """Handle key press events."""
         pressed_key = event.char.upper()
@@ -98,6 +107,7 @@ class TypingGame:
             self.score_label.config(text=f"Score: {self.score}")
             response = random.choice(JOYFUL_RESPONSES)
             self.response_label.config(text=response, fg='#00ff88')
+            self.root.bell()
             self.flash_screen()
             self.root.after(1200, self.new_round)
         elif pressed_key.isalpha():
