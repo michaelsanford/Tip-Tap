@@ -3,6 +3,7 @@
 
 import tkinter as tk
 import random
+import argparse
 
 JOYFUL_RESPONSES = [
     "🎉 Excellent! 🎉",
@@ -21,11 +22,16 @@ COLORS = ['#00FF41', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DD
 class TypingGame:
     """Main typing game class."""
 
-    def __init__(self):
+    def __init__(self, use_letters=True, use_numbers=False):
         """Initialize the typing game."""
         self.score = 0
         self.color_index = 0
         self.target_letter = None
+        self.character_set = []
+        if use_letters:
+            self.character_set.extend('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+        if use_numbers:
+            self.character_set.extend('0123456789')
         self.root = tk.Tk()
         self.root.title("Tip-Tap Typing Game")
         self.root.geometry("800x600")
@@ -65,8 +71,8 @@ class TypingGame:
         self.new_round()
 
     def new_round(self):
-        """Start a new round with a random letter."""
-        self.target_letter = random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+        """Start a new round with a random character."""
+        self.target_letter = random.choice(self.character_set)
         
         # Cycle through colors
         current_color = COLORS[self.color_index]
@@ -110,7 +116,7 @@ class TypingGame:
             self.root.bell()
             self.flash_screen()
             self.root.after(1200, self.new_round)
-        elif pressed_key.isalpha():
+        elif pressed_key.isalnum():
             error_msg = f"Oops! You pressed '{pressed_key}', try '{self.target_letter}'"
             self.response_label.config(text=error_msg, fg='#ff4757')
 
@@ -120,5 +126,14 @@ class TypingGame:
 
 
 if __name__ == "__main__":
-    game = TypingGame()
+    parser = argparse.ArgumentParser(description='A typing game for youngsters')
+    parser.add_argument('-letters', action='store_true', help='Enable letters (A-Z)')
+    parser.add_argument('-numbers', action='store_true', help='Enable numbers (0-9)')
+    args = parser.parse_args()
+    
+    # Default to letters if no flags specified
+    use_letters = args.letters or not (args.letters or args.numbers)
+    use_numbers = args.numbers
+    
+    game = TypingGame(use_letters, use_numbers)
     game.run()
