@@ -4,11 +4,12 @@ A typing game for youngsters
 
 ## Description
 
-Tip-Tap is a fun and educational typing game designed for young children learning to recognize letters and practice typing. The game displays large ASCII art letters made from the letter characters themselves, and players must press the corresponding key to score points.
+Tip-Tap is a fun and educational typing game designed for young children learning to recognize letters and numbers while practicing typing. The game displays large, colorful characters and players must press the corresponding key to score points.
 
 ## Features
 
-- Large, colorful ASCII art letters for easy recognition
+- Large, colorful letters and numbers for easy recognition
+- Configurable character sets (letters, numbers, or both)
 - Joyful responses and encouragement for correct answers
 - Score tracking
 - Simple, kid-friendly interface
@@ -26,12 +27,22 @@ Tip-Tap is a fun and educational typing game designed for young children learnin
 ## How to Run
 
 ```bash
+# Default mode (letters only)
 python tip_tap.py
+
+# Letters only
+python tip_tap.py -letters
+
+# Numbers only
+python tip_tap.py -numbers
+
+# Both letters and numbers
+python tip_tap.py -letters -numbers
 ```
 
 ## How to Play
 
-1. A large letter will appear on screen
+1. A large letter or number will appear on screen
 2. Press the matching key on your keyboard
 3. Get points for correct answers!
 4. Close the window when you're done playing
