@@ -2,25 +2,32 @@
 
 A typing game for youngsters
 
+![Win streak](win-streak.png)
+
 ## Description
 
-Tip-Tap is a fun and educational typing game designed for young children learning to recognize letters and numbers while practicing typing. The game displays large, colorful characters and players must press the corresponding key to score points.
+Tip-Tap is a fun and educational typing game designed for young children learning to recognize letters and numbers while practicing typing. The game displays large, colorful characters on screen — press the matching key to score points and build a win streak!
 
 ## Features
 
-- Large, colorful letters and numbers for easy recognition
-- Configurable character sets (letters, numbers, or both)
-- Joyful responses and encouragement for correct answers
+- Large, colorful letters and numbers fill the screen for easy recognition
+- Bounce animation when each new character appears
+- Confetti shower on correct answers
+- Rainbow flash and ascending musical chime on correct answers (Windows)
+- Shake animation and descending buzz on wrong answers (Windows)
+- Win streak counter with bonus milestone celebrations at 3, 5, and 10 in a row
 - Score tracking
-- Simple, kid-friendly interface
+- Configurable character sets (letters, numbers, or both)
+- Scales to any window size
+- No external dependencies — pure Python stdlib
 
 ## Requirements
 
-- Python 3.x (no additional libraries needed - uses built-in tkinter)
+- Python 3.x (no additional libraries needed — uses built-in tkinter)
 
 ## Platform Support
 
-- ✅ Windows
+- ✅ Windows (full audio support via `winsound`)
 - ✅ Linux (including WSL2)
 - ✅ macOS
 
@@ -42,9 +49,9 @@ python tip_tap.py -letters -numbers
 
 ## How to Play
 
-1. A large letter or number will appear on screen
+1. A large letter or number appears on screen
 2. Press the matching key on your keyboard
-3. Get points for correct answers!
+3. Score points and keep your streak alive!
 4. Close the window when you're done playing
 
 ## License
