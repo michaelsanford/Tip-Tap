@@ -61,3 +61,22 @@ MIT License - see LICENSE file for details
 ---
 
 Made with ❤️ for my daughter
+
+## Security scanning
+
+[Snyk](https://snyk.io) runs on every push and pull request, and weekly on a schedule,
+via [`.github/workflows/snyk.yml`](.github/workflows/snyk.yml):
+
+- **Snyk Code** — static analysis of first-party source
+
+Findings are published to this repository's **Security → Code scanning** tab. The build
+fails on anything at `high` severity or above.
+
+Run the same scans locally before pushing:
+
+```powershell
+./scripts/Invoke-SnykScan.ps1                          # exactly what CI runs
+./scripts/Invoke-SnykScan.ps1 -SeverityThreshold low   # everything, including noise
+```
+
+Requires the Snyk CLI (`winget install Snyk.Snyk`) and a one-time `snyk auth`.
